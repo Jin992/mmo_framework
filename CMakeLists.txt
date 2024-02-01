@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.1...3.27)
 
 # This is your project statement. You should always list languages;
 # Listing the version is nice here since it sets lots of useful variables
-project(mmo_server VERSION 1.0 LANGUAGES CXX)
+project(mmo_framework_game_node VERSION 1.0 LANGUAGES CXX)
 
  # Set C++ standard to C++20
  set(CMAKE_CXX_STANDARD 20)
@@ -15,16 +15,16 @@ project(mmo_server VERSION 1.0 LANGUAGES CXX)
  # Add the path to the directory containing FindLiburing.cmake to CMAKE_MODULE_PATH
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/")
 
-file(GLOB sources CONFIGURE_DEPENDS *.cpp)
-file(GLOB headers CONFIGURE_DEPENDS *.hpp)
+file(GLOB sources CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB headers CONFIGURE_DEPENDS src/*.hpp)
 
  # Find and set up the required packages
 find_package(Threads REQUIRED)
-find_package(Boost 1.83 COMPONENTS system) 
+find_package(Boost 1.81 COMPONENTS system) 
 
  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcoroutines")
 
- # Link each target with other targets or add options, etc.
+ # Link each target with other tar gets or add options, etc.
 
  # Adding something we can run - Output name matches target name
  add_executable(${PROJECT_NAME} ${sources} ${headers})

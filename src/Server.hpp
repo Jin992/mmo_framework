@@ -8,7 +8,6 @@
 #include <cstdio>
 #include <iostream>
  
- 
 void report_error(std::string_view component, boost::system::error_code ec)
 {
   std::cerr << component << " failure: "
@@ -24,7 +23,7 @@ boost::asio::awaitable<void> session(boost::asio::ip::tcp::socket socket, std::f
     {
       std::size_t n = co_await socket.async_read_some(boost::asio::buffer(data), boost::asio::use_awaitable);
       callback(data, n);
-      co_await async_write(socket, boost::asio::buffer(data, n), boost::asio::use_awaitable);
+      //co_await async_write(socket, boost::asio::buffer(data, n), boost::asio::use_awaitable);
     }
   }
   catch (boost::system::system_error const& e)
@@ -45,7 +44,7 @@ boost::asio::awaitable<void> listener(boost::asio::io_context& context, unsigned
         {
             std::cout << "Waiting for connection" << std::endl;
             boost::asio::ip::tcp::socket socket = co_await acceptor.async_accept(boost::asio::use_awaitable);
-            boost::asio::co_spawn(context, session(std::move(socket)), boost::asio::detached);
+            boost::asio::co_spawn(context, session(std::move(socket), callback), boost::asio::detached);
         }
     }
     catch (boost::system::system_error const& e)
@@ -57,7 +56,7 @@ boost::asio::awaitable<void> listener(boost::asio::io_context& context, unsigned
 
 class TcpServer{
     public:
-        TcpServer(unsigned short port, std::function<void(char*, std::size_t)> callback)
+        TcpServer(unsigned short port)
         : m_context()
         , m_port(port)
         {}

@@ -1,8 +1,5 @@
-#include "Server.hpp"
-#include <boost/asio/io_context.hpp>
-#include "json.hpp"
-
-using json = nlohmann::json;
+#include "net/TcpServer.hpp"
+#include "net/Response.hpp"
 
 void display_header()
 {
@@ -26,17 +23,7 @@ void display_header()
 
 int main() {
     display_header();
-
-    TcpServer server(8555);
-
-    auto callback = [](char* data, std::size_t len) {
-        std::string result(data, data + len);
-        json jsonData= json::parse(result);
-        std::cout << jsonData.dump() << std::endl;
-
-        //std::cout << "Msg Len: " << len << std::endl;
-
-    };
-    server.run(callback);
+    TcpServer<net::tcp::response::Response> server(8555);
+    server.run();
     return 0;
 }

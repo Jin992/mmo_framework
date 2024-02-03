@@ -12,24 +12,25 @@ project(mmo_framework_game_node VERSION 1.0 LANGUAGES CXX)
  set(CMAKE_CXX_STANDARD 20)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
- # Add the path to the directory containing FindLiburing.cmake to CMAKE_MODULE_PATH
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/")
+file(GLOB sources CONFIGURE_DEPENDS src/*.cpp src/net/.*cpp src/game/*.cpp)
+file(GLOB headers CONFIGURE_DEPENDS src/*.hpp src/net/.*hpp src/game/*.hpp)
 
-file(GLOB sources CONFIGURE_DEPENDS src/*.cpp)
-file(GLOB headers CONFIGURE_DEPENDS src/*.hpp)
 
+
+message(${headers})
  # Find and set up the required packages
 find_package(Threads REQUIRED)
-find_package(Boost 1.81 COMPONENTS system) 
+find_package(Boost 1.81 COMPONENTS system)
+#find_package(cppcoro REQUIRED)
 
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcoroutines")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread -fcoroutines")
 
  # Link each target with other tar gets or add options, etc.
 
  # Adding something we can run - Output name matches target name
- add_executable(${PROJECT_NAME} ${sources} ${headers})
-
+ add_executable(${PROJECT_NAME} ${headers} ${sources})
+ target_include_directories(${PROJECT_NAME} PUBLIC  src/)
  # Make sure you link your targets with this command. It can also link libraries and
  # even flags, so linking a target that does not exist will not give a configure-time error.
- target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+ target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES}  )#cppcoro::cppcoro)
 # target_link_libraries(CoroSched PRIVATE Threads::Threads)

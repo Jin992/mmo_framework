@@ -21,9 +21,15 @@ class TcpServer{
         TcpServer(unsigned short port)
         : m_context()
         , m_port(port)
-        {}
+        , m_signals(m_context, SIGINT, SIGTERM)
+        {
+        }
         void run()
         {
+           m_signals.async_wait([this](auto, auto){ 
+              std::cout << "Ctrl + C detected, stop." << std::endl;
+              m_context.stop(); 
+            });
             try {
                 auto listen = listener(m_context, m_port);
                 boost::asio::co_spawn(m_context, std::move(listen), boost::asio::detached);
@@ -83,4 +89,5 @@ class TcpServer{
     private:
         boost::asio::io_context         m_context;
         short int                       m_port;
+        boost::asio::signal_set         m_signals;
 };

@@ -20,7 +20,7 @@ file(GLOB headers CONFIGURE_DEPENDS src/*.hpp src/net/.*hpp src/game/*.hpp)
 message(${headers})
  # Find and set up the required packages
 find_package(Threads REQUIRED)
-find_package(Boost 1.81 COMPONENTS system)
+find_package(Boost 1.80 COMPONENTS system)
 #find_package(cppcoro REQUIRED)
 
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread -fcoroutines")

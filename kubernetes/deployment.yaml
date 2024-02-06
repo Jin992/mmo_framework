@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mmo-framework
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mmo-framework
+  template:
+    metadata:
+      labels:
+        app: mmo-framework
+    spec:
+      containers:
+      - name: mmo-framework
+        image: localhost:5000/game_node:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8555

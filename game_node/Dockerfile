@@ -32,4 +32,6 @@ COPY --chown=shs:shs --from=build \
     ./mmo_framework_game_node/build/mmo_framework_game_node \
     ./app/
 
+EXPOSE 8555
+
 ENTRYPOINT [ "./app/mmo_framework_game_node" ]

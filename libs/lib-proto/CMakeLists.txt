@@ -11,5 +11,5 @@ add_library(${PROJECT_NAME} STATIC  ${PROTO_SRCS} ${PROTO_HDRS} ${proto_files})
 add_library(libmmo::protobuf ALIAS ${PROJECT_NAME})
 add_custom_target(pythonSrc ALL DEPENDS ${PROTO_PY})
 
-target_include_directories(${PROJECT_NAME} PUBLIC  "/home/yarteshc/mmo_cluster/libs/proto/build/")
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(${PROJECT_NAME} -lprotobuf)

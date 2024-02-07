@@ -4,6 +4,7 @@
 #include <string>
 #include "XYZVector.hpp"
 
+namespace game {
 class Motion {
     public:
         Motion() {}
@@ -38,4 +39,5 @@ std::ostream &operator<<(std::ostream &strm, const Motion &obj)
          << " Position: " << obj.postion() << " Rotation: " 
          << obj.rotation() << " Velocity: " << obj.velocity();
     return strm;
+}
 }

@@ -5,6 +5,7 @@
 
 using json = nlohmann::json;
 
+namespace game {
 class XYZVector
 {
     public:
@@ -36,4 +37,5 @@ std::ostream &operator<<(std::ostream &strm, const XYZVector &obj)
 {
     strm << "{x: " << obj.x() << " y: " << obj.y() << " z: " << obj.z() << "}";
     return strm;
+}
 }

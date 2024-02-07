@@ -12,7 +12,7 @@ namespace net::tcp::response {
             boost::asio::awaitable<net::common::RawNetworkData> get(net::common::RawNetworkData &&data) override {
                 json jsonData = json::parse(data);
                 //std::cout << jsonData.dump(4) << std::endl;
-                Character mob(jsonData["Character"]);
+                game::Character mob(jsonData["Character"]);
                 std::cout << mob << std::endl;
                 co_return data;
             }

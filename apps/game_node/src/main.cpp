@@ -1,6 +1,8 @@
 #include "net/TcpServer.hpp"
 #include "net/Response.hpp"
 #include <zmq.hpp>
+#include "mmo.pb.h"
+
 void display_header()
 {
     std::string header( 

@@ -1,6 +1,6 @@
 #include "Motion.hpp"
 
-
+namespace game {
 class Character
 {
     public:
@@ -42,4 +42,5 @@ std::ostream &operator<<(std::ostream& strm, const Character& obj)
 {
     strm << "Character{ Id: " << obj.id() << " InstanceId: " << obj.instanceId() << " MapId: " << obj.mapId() << " " << obj.motion();
     return strm;
+}
 }

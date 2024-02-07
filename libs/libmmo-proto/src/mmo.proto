@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+enum MessageTypeE{
+    AuthReq = 0;
+    AuthReqAck = 1;
+}
+
+message AuthRequest {
+    string login = 1;
+    string password = 2;
+}
+
+message AuthRequestAck {
+    bool result = 1;
+    google.protobuf.Any type = 3;
+}
+
+message NetworkMessage {
+    MessageTypeE id = 1;
+    oneof payload {
+        AuthRequest    auth_req = 2;
+        AuthRequestAck auth_req_ack = 3;
+    }
+}

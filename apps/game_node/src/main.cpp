@@ -1,6 +1,6 @@
 #include "net/TcpServer.hpp"
 #include "net/Response.hpp"
-
+#include <zmq.hpp>
 void display_header()
 {
     std::string header( 

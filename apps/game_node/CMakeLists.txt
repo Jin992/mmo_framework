@@ -15,13 +15,12 @@ project(mmo_framework_game_node VERSION 1.0 LANGUAGES CXX)
 file(GLOB sources CONFIGURE_DEPENDS src/*.cpp src/net/.*cpp src/game/*.cpp)
 file(GLOB headers CONFIGURE_DEPENDS src/*.hpp src/net/.*hpp src/game/*.hpp)
 
-
-
 message(${headers})
  # Find and set up the required packages
 find_package(Threads REQUIRED)
 find_package(Boost 1.80 COMPONENTS system)
 #find_package(cppcoro REQUIRED)
+find_package(cppzmq)
 
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread -fcoroutines")
 
@@ -32,5 +31,5 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread -fcoroutines")
  target_include_directories(${PROJECT_NAME} PUBLIC  src/)
  # Make sure you link your targets with this command. It can also link libraries and
  # even flags, so linking a target that does not exist will not give a configure-time error.
- target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES}  )#cppcoro::cppcoro)
+ target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} )#cppcoro::cppcoro)
 # target_link_libraries(CoroSched PRIVATE Threads::Threads)

@@ -1,7 +1,6 @@
 #include "net/TcpServer.hpp"
 #include "net/Response.hpp"
-#include <zmq.hpp>
-#include "mmo.pb.h"
+#include "mmo.capnp.h"
 
 void display_header()
 {

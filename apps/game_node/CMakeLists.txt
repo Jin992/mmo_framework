@@ -21,14 +21,14 @@ find_package(Threads REQUIRED)
 find_package(Boost 1.80 COMPONENTS system)
 #find_package(cppcoro REQUIRED)
 
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread -fcoroutines")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread  -fcoroutines-ts")
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/../../libs/lib-rpc rpc)
 
  # Adding something we can run - Output name matches target name
  add_executable(${PROJECT_NAME} ${headers} ${sources})
- target_include_directories(${PROJECT_NAME} PUBLIC  src/)
+ target_include_directories(${PROJECT_NAME} PUBLIC  /src)
  # Make sure you link your targets with this command. It can also link libraries and
  # even flags, so linking a target that does not exist will not give a configure-time error.
- target_link_libraries(${PROJECT_NAME} PRIVATE -lamqcpp -lpthread ${Boost_LIBRARIES} libmmo::rpc)#cppcoro::cppcoro)
+ target_link_libraries(${PROJECT_NAME} PRIVATE ${Boost_LIBRARIES} libmmo::rpc)#cppcoro::cppcoro)
 # target_link_libraries(CoroSched PRIVATE Threads::Threads)

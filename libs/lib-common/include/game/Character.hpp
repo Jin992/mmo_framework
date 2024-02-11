@@ -7,6 +7,7 @@ namespace game {
     class Character
     {
         public:
+            Character();
             Character(const std::string &id, const std::string &instanceId, const std::string &mapId, const Motion &motion);
             Character(const json &jsonObj);
 

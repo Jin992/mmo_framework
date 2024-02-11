@@ -1,7 +1,5 @@
 #include "net/TcpServer.hpp"
 #include "net/Response.hpp"
-#include "RealmClient.hpp"
-#include "game/Character.hpp"
 
 void display_header()
 {
@@ -26,13 +24,8 @@ void display_header()
 
 
 int main() {
-    // display_header();
-    // TcpServer<net::tcp::response::Response> server(8555);
-    // server.run();
-    // return 0;
-
-    rpc::realm::client::RealmClient realmClient("127.0.0.1:5005");
-    game::Character Arcaniel{{"Arcaniel"}, {"instance_0"}, {"Map0"}, {{"Start"}, {0,0,0}, {0,0,0}, {0,0,0}}};
-
-    realmClient.updateCharacter(Arcaniel);
+    display_header();
+    TcpServer<net::tcp::response::Response> server(8555);
+    server.run();
+    return 0;    
 }

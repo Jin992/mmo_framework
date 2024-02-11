@@ -1,6 +1,9 @@
 #include "game/Character.hpp"
 
 namespace game {
+Character::Character()
+{}
+
 Character::Character(const std::string &id, const std::string &instanceId, const std::string &mapId, const Motion &motion) 
 : mId(id), mInstanceId(instanceId), mMapId(mapId), mMotion(motion)
 {}

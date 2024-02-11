@@ -1,7 +1,7 @@
 #include "ResponseBase.hpp"
-#include "protocols/json.hpp"
+#include "game/protocols/json.hpp"
 #include <iostream>
-// #include "Character.hpp"
+#include "game/Character.hpp"
 
 using json = nlohmann::json;
 

@@ -20,5 +20,9 @@ struct Character{
 }
 
 interface RealmBase {
-    updateCharacter @0 (character :Character) -> (status :Bool);
+    updateCharacter @0 (character :Character) -> (value :UpdateCharacterValue);
+    
+    interface UpdateCharacterValue {
+        read @0 () -> (value :Bool);
+    }
 }

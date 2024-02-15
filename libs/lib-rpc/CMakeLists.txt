@@ -15,4 +15,4 @@ add_library(libmmo::rpc ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/proto/  ${PROJECT_SOURCE_DIR}/include)
-target_link_libraries(${PROJECT_NAME}  CapnProto::capnp-rpc libmmo::common) 
+target_link_libraries(${PROJECT_NAME}  CapnProto::capnp-rpc ) 

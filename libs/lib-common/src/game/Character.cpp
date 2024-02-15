@@ -1,6 +1,6 @@
 #include "game/Character.hpp"
 
-namespace game {
+namespace mmo::common::game {
 Character::Character()
 {}
 

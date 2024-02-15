@@ -1,6 +1,6 @@
 #include "game/XYZVector.hpp"
 
-namespace game {
+namespace mmo::common::game {
     XYZVector::XYZVector()
     {}
         
@@ -18,5 +18,15 @@ namespace game {
     {
         strm << "{x: " << obj.x() << " y: " << obj.y() << " z: " << obj.z() << "}";
         return strm;
+    }
+
+    XYZVector XYZVector::operator-(XYZVector const & obj)
+    {
+        return { x() - obj.x(), y() - obj.y(), z() - obj.z()};
+    }
+
+    XYZVector XYZVector::operator+(XYZVector const & obj)
+    {
+        return { x() + obj.x(), y() + obj.y(), z() + obj.z()};
     }
 }

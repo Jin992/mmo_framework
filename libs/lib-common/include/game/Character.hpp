@@ -3,7 +3,7 @@
 
 #include "Motion.hpp"
 
-namespace game {
+namespace mmo::common::game {
     class Character
     {
         public:

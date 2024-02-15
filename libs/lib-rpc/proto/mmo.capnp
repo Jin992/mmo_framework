@@ -21,8 +21,13 @@ struct Character{
 
 interface RealmBase {
     updateCharacter @0 (character :Character) -> (value :UpdateCharacterValue);
-    
+    getNearestCharacters @1 (character :Character) -> (value :GetNearestCharactersValue);
+
     interface UpdateCharacterValue {
         read @0 () -> (value :Bool);
+    }
+
+    interface GetNearestCharactersValue {
+        read @0 () -> (value: List(Character));
     }
 }

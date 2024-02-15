@@ -6,7 +6,7 @@
 #include <string>
 #include "XYZVector.hpp"
 
-namespace game {
+namespace mmo::common::game {
     class Motion {
         public:
             Motion();
@@ -14,7 +14,7 @@ namespace game {
             Motion(const json &jsonObj);
 
             const std::string &mapName() const { return mMapName; }
-            const XYZVector &postion() const { return mPostion; }
+            const XYZVector &position() const { return mPostion; }
             const XYZVector &rotation() const { return mRotation; }
             const XYZVector &velocity() const { return mVelocity; }
 

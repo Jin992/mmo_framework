@@ -20,3 +20,9 @@ kj::Promise<void> RealmImpl::updateCharacter(UpdateCharacterContext context)
     context.getResults().setValue(kj::heap<UpdateCharacterValueImpl>(true));
     return kj::READY_NOW;
 }
+
+kj::Promise<void> getNearestCharacters(GetNearestCharactersContext context)
+{
+    auto character = context.getParams().getCharacter();
+    
+}

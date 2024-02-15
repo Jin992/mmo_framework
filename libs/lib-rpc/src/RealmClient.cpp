@@ -14,11 +14,11 @@ namespace rpc::realm::client {
       mRealmClientPtr = std::make_unique<RealmBase::Client>(mRpcConnPtr->bootstrap().castAs<RealmBase>());
     }
 
-    void RealmClient::updateCharacter(const game::Character &character)
+    void RealmClient::updateCharacter(const Character &character)
     {
       auto req = mRealmClientPtr->updateCharacterRequest();
-      req.getCharacter().setId(character.id());
-      req.getCharacter().setInstanceId(character.instanceId());
+      //req.getCharacter().setId(character.getId());
+      //req.getCharacter().setInstanceId(character.getInstanceId());
       auto updatePromise = req.send();
 
       auto readPromise = updatePromise.getValue().readRequest().send();

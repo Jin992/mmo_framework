@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-namespace game {
+namespace mmo::common::game {
     class XYZVector
     {
         public:
@@ -21,6 +21,9 @@ namespace game {
             int z() const { return mZ; }
 
             friend std::ostream &operator<<(std::ostream&, const XYZVector&);
+
+            XYZVector operator-(XYZVector const & obj);
+            XYZVector operator+(XYZVector const & obj);
 
         private:
             int mX;

@@ -1,6 +1,6 @@
 #include "game/Motion.hpp"
 
-namespace game {
+namespace mmo::common::game {
         Motion::Motion() 
         {}
 
@@ -19,7 +19,7 @@ namespace game {
         std::ostream &operator<<(std::ostream &strm, const Motion &obj)
         {
             strm << " Motion{MapName:  " << obj.mapName() 
-                 << " Position: " << obj.postion() << " Rotation: " 
+                 << " Position: " << obj.position() << " Rotation: " 
                  << obj.rotation() << " Velocity: " << obj.velocity();
             return strm;
         }

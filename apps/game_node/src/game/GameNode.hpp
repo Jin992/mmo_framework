@@ -14,41 +14,17 @@ namespace mmo::game::node
     : public Observer<PlayerCommand&>
     , public Observer<std::shared_ptr<TcpSession>>
     {
-        public:
-            
-
         private:
-            void mProcessPlayerCommand(PlayerCommand command)
-            {
-                std::cout << "Received command from Player to process" << std::endl;
-            }
+            void mProcessPlayerCommand(PlayerCommand command);
+            void addNewPlayer(const std::shared_ptr<TcpSession>& newSession);
 
-            void update(PlayerCommand &command)
-            {
-                auto task = [this, command](){ mProcessPlayerCommand(command); };
-                mContext.post({"Process player", false, task});
-            }
 
-            void update(std::shared_ptr<TcpSession> newSession)
-            {
-                addNewPlayer(newSession);
-            }
-
-            void addNewPlayer(std::shared_ptr<TcpSession> newSession)
-            {
-                auto task = [this, newSession](){
-                    mPlayers.emplace_back(newSession);
-                    auto playerIter = mPlayers.rbegin();
-                    playerIter->registerObserver(*this);
-                };
-                mContext.post({"Add new player", true, task});
-            }
+            void update(PlayerCommand &command) final;
+            void update(std::shared_ptr<TcpSession> newSession) final;
 
         private:
             WorkingContext    mContext;
             std::list<Player> mPlayers;
-
-
     };
 }
 #endif

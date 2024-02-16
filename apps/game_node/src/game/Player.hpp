@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 #include "GameSession.hpp"
-#include "commands/GameCommand.hpp"
+#include "commands/GameCommandBase.hpp"
 
 class Player;
 
@@ -18,36 +18,15 @@ class Player
 , public Observer<GameCommandBase>
 {
     public:
-        Player(std::shared_ptr<TcpSession> sessionPtr)
-        : mGameSession(std::move(sessionPtr))
-        {
+        explicit Player(std::shared_ptr<TcpSession> sessionPtr);
+        Player(const Player& other) = delete;
+        Player(Player&& other) noexcept;
+        ~Player();
 
-            mGameSession.registerObserver(*this);
-        }
+        void operator=(const Player &) = delete;
+        Player& operator=(Player&& other);
 
-//        Player(const Player& other) = delete;
-//        Player(Player&& other) noexcept {
-//            mGameSession = std::move(other.mGameSession);
-//        }
-//
-//        void operator=(const Player &) = delete;
-//        Player& operator=(Player&& other)
-//        {
-//            mGameSession = std::move(other.mGameSession);
-//            return *this;
-//        }
-
-        ~Player()
-        {
-        }
-
-        void update(GameCommandBase command) final
-        {
-            std::cout << "Received Player Data" << std::endl;
-            PlayerCommand playerAction = {.command=command, .playerRef=*this};
-            notifyObservers(playerAction);
-        }
-
+        void update(GameCommandBase command) final;
     private:
         GameSession mGameSession;
         

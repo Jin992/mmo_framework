@@ -3,47 +3,23 @@
 
 #include <memory>
 #include "net/TcpSession.hpp"
-#include "commands/GameCommand.hpp"
+#include "commands/GameCommandBase.hpp"
 #include "Subject.hpp"
-#include <iostream>
-#include "game/protocols/json.hpp"
-using json = nlohmann::json;
 
 class GameSession
 : public Observer<net::common::RawNetworkData>
 , public Subject<GameCommandBase>
 {
     public:
-        GameSession() {}
-        GameSession(std::shared_ptr<TcpSession> tcpSessionPtr)
-        : mTcpSessionPtr(std::move(tcpSessionPtr))
-        {
-            mTcpSessionPtr->registerObserver(*this);
-            mTcpSessionPtr->start();
-        }
+        GameSession() = default;
+        explicit GameSession(std::shared_ptr<TcpSession> tcpSessionPtr);
+        GameSession(const GameSession& other) = delete;
+        GameSession(GameSession&& other) noexcept;
 
-//        GameSession(const GameSession& other) = delete;
-//        GameSession(GameSession&& other) noexcept {
-//            mTcpSessionPtr = std::move(other.mTcpSessionPtr);
-//        }
-//
-//        void operator=(const GameSession &) = delete;
-//        GameSession& operator=(GameSession&& other)
-//        {
-//            mTcpSessionPtr = std::move(other.mTcpSessionPtr);
-//            return *this;
-//        }
+        void operator=(const GameSession &) = delete;
+        GameSession& operator=(GameSession&& other) noexcept ;
 
-
-        void update(net::common::RawNetworkData data) final
-        {
-            GameCommandBase command;
-            //json jsonData = json::parse(data);
-            //std::cout << jsonData.dump(4) << std::endl;
-            notifyObservers(command);
-        }
-
-
+        void update(net::common::RawNetworkData data) final;
 
     private:
         std::shared_ptr<TcpSession> mTcpSessionPtr;

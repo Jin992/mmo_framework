@@ -9,13 +9,4 @@ public:
     GameCommandBase(/* args */);
     ~GameCommandBase();
 };
-
-GameCommandBase::GameCommandBase(/* args */)
-{
-}
-
-GameCommandBase::~GameCommandBase()
-{
-}
-
 #endif

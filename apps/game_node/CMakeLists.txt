@@ -12,7 +12,7 @@ project(game_node VERSION 1.0 LANGUAGES CXX)
  set(CMAKE_CXX_STANDARD 20)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB sources CONFIGURE_DEPENDS src/*.cpp src/net/..cpp src/game/*.cpp)
+file(GLOB sources CONFIGURE_DEPENDS src/*.cpp src/net/*.cpp src/game/*.cpp src/game/commands/*.cpp)
 file(GLOB headers CONFIGURE_DEPENDS src/*.hpp )
 
  # Find and set up the required packages

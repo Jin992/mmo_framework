@@ -27,7 +27,6 @@ void GameSession::update(net::common::RawNetworkData data)
 {
     //GameCommandBase &command;
     json jsonData = json::parse(data);
-
     auto updateType = jsonData["updateType"].get<std::string>();
     if (updateType == "PLAYER_MOTION")
     {

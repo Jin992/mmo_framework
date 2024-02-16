@@ -11,7 +11,7 @@ namespace mmo::common::game {
             Character(const std::string &id, const std::string &instanceId, const std::string &mapId, const Motion &motion);
             Character(const json &jsonObj);
 
-            void update(const std::string &id, const std::string &instanceId, const std::string &mapId, const Motion &motion);
+            void set(const std::string &id, const std::string &instanceId, const std::string &mapId, const Motion &motion);
 
             std::string id() const { return mId; }
             std::string instanceId() const { return mInstanceId; };
@@ -19,6 +19,8 @@ namespace mmo::common::game {
             Motion      motion() const { return mMotion; }
 
             friend std::ostream &operator<<(std::ostream&, const Character&);
+
+            json toJson();
 
         private:
             std::string mId;

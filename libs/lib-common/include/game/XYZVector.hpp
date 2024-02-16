@@ -25,6 +25,7 @@ namespace mmo::common::game {
             XYZVector operator-(XYZVector const & obj);
             XYZVector operator+(XYZVector const & obj);
 
+            json toJson();
         private:
             int mX;
             int mY;

@@ -19,7 +19,9 @@ namespace mmo::common::game {
             const XYZVector &velocity() const { return mVelocity; }
 
             friend std::ostream &operator<<(std::ostream&, const Motion&);
-        
+
+            json toJson();
+
         private:
             std::string mMapName;
             XYZVector mPostion;

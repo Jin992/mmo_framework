@@ -1,5 +1,7 @@
 #include "game/GameSession.hpp"
 #include <iostream>
+#include "game/commands/GamePlayerLoadCommand.hpp"
+#include "game/commands/GamePlayerUpdateCommand.hpp"
 #include "game/protocols/json.hpp"
 using json = nlohmann::json;
 
@@ -23,8 +25,27 @@ GameSession& GameSession::operator=(GameSession&& other) noexcept
 
 void GameSession::update(net::common::RawNetworkData data)
 {
-    GameCommandBase command;
-    //json jsonData = json::parse(data);
-    //std::cout << jsonData.dump(4) << std::endl;
-    notifyObservers(command);
+    //GameCommandBase &command;
+    json jsonData = json::parse(data);
+
+    auto updateType = jsonData["updateType"].get<std::string>();
+    if (updateType == "PLAYER_MOTION")
+    {
+        mmo::common::game::Character character(jsonData["Character"]);
+        notifyObservers(std::make_shared<GamePlayerUpdateCommand>(character));
+    }
+
+    //notifyObservers(command);
+}
+
+void GameSession::sendCmdToClient(std::shared_ptr<GameCommandBase> cmd)
+{
+    if(cmd->id() == GameCommandE::PLAYER_UPDATE)
+    {
+        auto updateCmd = std::dynamic_pointer_cast<GamePlayerUpdateCommand>(cmd);
+        auto character = updateCmd->getCharacter();
+        auto jsonStr = character.toJson().dump();
+        mTcpSessionPtr->sendData(net::common::RawNetworkData(jsonStr.begin(), jsonStr.end()));
+    }
+
 }

@@ -1,12 +1,19 @@
 #include "game/GameNode.hpp"
 #include <iostream>
+#include "game/commands/GamePlayerUpdateCommand.hpp"
 
 namespace mmo::game::node {
     void GameNode::mProcessPlayerCommand(PlayerCommand command) {
-        std::cout << "Received command from Player to process" << std::endl;
+        if (command.command->id() == GameCommandE::PLAYER_UPDATE)
+        {
+            auto cmd = std::dynamic_pointer_cast<GamePlayerUpdateCommand>(command.command);
+            auto character = cmd->getCharacter();
+            /* Do some action on character */
+            command.playerRef.updateGameClient(cmd);
+        }
     }
 
-    void GameNode::update(PlayerCommand &command) {
+    void GameNode::update(PlayerCommand command) {
         auto task = [this, command]() { mProcessPlayerCommand(command); };
         mContext.post({"Process player", false, task});
     }

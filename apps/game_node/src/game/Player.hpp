@@ -5,17 +5,18 @@
 #include <utility>
 #include "GameSession.hpp"
 #include "commands/GameCommandBase.hpp"
+#include "game/Character.hpp"
 
 class Player;
 
 struct PlayerCommand {
-    GameCommandBase     command;
+    std::shared_ptr<GameCommandBase> command;
     Player             &playerRef;
 };
 
 class Player
-: public Subject<PlayerCommand &>
-, public Observer<GameCommandBase>
+: public Subject<PlayerCommand>
+, public Observer<std::shared_ptr<GameCommandBase>>
 {
     public:
         explicit Player(std::shared_ptr<TcpSession> sessionPtr);
@@ -26,9 +27,14 @@ class Player
         void operator=(const Player &) = delete;
         Player& operator=(Player&& other);
 
-        void update(GameCommandBase command) final;
+        mmo::common::game::Character getGameCharacter();
+
+        void update(std::shared_ptr<GameCommandBase> playerAction) final;
+
+        void updateGameClient(std::shared_ptr<GameCommandBase> cmd);
     private:
-        GameSession mGameSession;
+        GameSession                     mGameSession;
+        mmo::common::game::Character    mGameCharacter;
         
 };
 #endif

@@ -20,10 +20,19 @@ Player& Player::operator=(Player&& other)
     return *this;
 }
 
-
-void Player::update(GameCommandBase command)
+mmo::common::game::Character Player::getGameCharacter()
 {
-    std::cout << "Received Player Data" << std::endl;
-    PlayerCommand playerAction = {.command=command, .playerRef=*this};
-    notifyObservers(playerAction);
+    return mGameCharacter;
+}
+
+
+void Player::update( std::shared_ptr<GameCommandBase> cmd)
+{
+    PlayerCommand playerAc = {.command=cmd, .playerRef=*this};
+    notifyObservers(playerAc);
+}
+
+void Player::updateGameClient(std::shared_ptr<GameCommandBase> cmd)
+{
+    mGameSession.sendCmdToClient(cmd);
 }

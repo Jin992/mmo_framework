@@ -11,7 +11,7 @@
 namespace mmo::game::node 
 {
     class GameNode
-    : public Observer<PlayerCommand&>
+    : public Observer<PlayerCommand>
     , public Observer<std::shared_ptr<TcpSession>>
     {
         private:
@@ -19,7 +19,7 @@ namespace mmo::game::node
             void addNewPlayer(const std::shared_ptr<TcpSession>& newSession);
 
 
-            void update(PlayerCommand &command) final;
+            void update(PlayerCommand command) final;
             void update(std::shared_ptr<TcpSession> newSession) final;
 
         private:

@@ -8,7 +8,7 @@
 
 class GameSession
 : public Observer<net::common::RawNetworkData>
-, public Subject<GameCommandBase>
+, public Subject<std::shared_ptr<GameCommandBase>>
 {
     public:
         GameSession() = default;
@@ -20,6 +20,8 @@ class GameSession
         GameSession& operator=(GameSession&& other) noexcept ;
 
         void update(net::common::RawNetworkData data) final;
+
+        void sendCmdToClient(std::shared_ptr<GameCommandBase> cmd);
 
     private:
         std::shared_ptr<TcpSession> mTcpSessionPtr;

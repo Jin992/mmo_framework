@@ -29,4 +29,9 @@ namespace mmo::common::game {
     {
         return { x() + obj.x(), y() + obj.y(), z() + obj.z()};
     }
+
+    json  XYZVector::toJson()
+    {
+        return {{"x", mX}, {"y", mY}, {"z", mZ}};
+    }
 }

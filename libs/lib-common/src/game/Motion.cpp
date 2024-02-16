@@ -24,4 +24,10 @@ namespace mmo::common::game {
             return strm;
         }
 
+        json Motion::toJson()
+        {
+            return {{"map", mMapName}, {"position", mPostion.toJson()},
+                    {"rotation", mRotation.toJson()}, {"velocity", mVelocity.toJson()}
+            };
+        }
 }

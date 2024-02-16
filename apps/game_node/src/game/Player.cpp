@@ -25,14 +25,13 @@ mmo::common::game::Character Player::getGameCharacter()
     return mGameCharacter;
 }
 
+GameSession & Player::getGameSession()
+{
+    return mGameSession;
+}
 
 void Player::update( std::shared_ptr<GameCommandBase> cmd)
 {
     PlayerCommand playerAc = {.command=cmd, .playerRef=*this};
     notifyObservers(playerAc);
-}
-
-void Player::updateGameClient(std::shared_ptr<GameCommandBase> cmd)
-{
-    mGameSession.sendCmdToClient(cmd);
 }

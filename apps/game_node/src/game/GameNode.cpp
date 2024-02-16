@@ -9,7 +9,7 @@ namespace mmo::game::node {
             auto cmd = std::dynamic_pointer_cast<GamePlayerUpdateCommand>(command.command);
             auto character = cmd->getCharacter();
             /* Do some action on character */
-            command.playerRef.updateGameClient(cmd);
+            command.playerRef.getGameSession().sendCmdToClient(cmd);
         }
     }
 

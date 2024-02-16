@@ -34,8 +34,6 @@ void GameSession::update(net::common::RawNetworkData data)
         mmo::common::game::Character character(jsonData["Character"]);
         notifyObservers(std::make_shared<GamePlayerUpdateCommand>(character));
     }
-
-    //notifyObservers(command);
 }
 
 void GameSession::sendCmdToClient(std::shared_ptr<GameCommandBase> cmd)

@@ -11,7 +11,7 @@
 namespace mmo::game::node 
 {
     class GameNode
-    : public Observer<PlayerCommand>
+    : public Observer<PlayerCommand&>
     , public Observer<std::shared_ptr<TcpSession>>
     {
         public:
@@ -23,7 +23,7 @@ namespace mmo::game::node
                 std::cout << "Received command from Player to process" << std::endl;
             }
 
-            void update(PlayerCommand command)
+            void update(PlayerCommand &command)
             {
                 auto task = [this, command](){ mProcessPlayerCommand(command); };
                 mContext.post({"Process player", false, task});
@@ -37,11 +37,9 @@ namespace mmo::game::node
             void addNewPlayer(std::shared_ptr<TcpSession> newSession)
             {
                 auto task = [this, newSession](){
-                    mPlayers.emplace_back(Player(newSession));
+                    mPlayers.emplace_back(newSession);
                     auto playerIter = mPlayers.rbegin();
                     playerIter->registerObserver(*this);
-                    newSession->start();
-                    std::cout << "Added new player" << std::endl;
                 };
                 mContext.post({"Add new player", true, task});
             }

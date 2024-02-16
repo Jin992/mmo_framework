@@ -9,7 +9,7 @@
 template <class Type>
 class Subject {
 public:
-   virtual ~Subject() = 0;
+   //virtual ~Subject() = 0;
    void registerObserver(Observer<Type> &o) 
    {
        mObservers.push_back(o);
@@ -27,7 +27,7 @@ private:
    std::vector<std::reference_wrapper<Observer<Type>>> mObservers;
 };
 
-template <class Type>
-Subject<Type>::~Subject() {}
+//template <class Type>
+//Subject<Type>::~Subject() {}
 
 #endif

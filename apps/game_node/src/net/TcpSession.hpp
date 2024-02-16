@@ -32,8 +32,7 @@ private:
         {
           if (!ec)
           {
-            auto data = net::common::RawNetworkData(data_, data_ + length);
-            notifyObservers(data);
+            notifyObservers(net::common::RawNetworkData(data_, data_ + length));
             //do_write(result);
             do_read();
           }

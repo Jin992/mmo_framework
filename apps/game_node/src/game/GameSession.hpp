@@ -11,23 +11,35 @@ using json = nlohmann::json;
 
 class GameSession
 : public Observer<net::common::RawNetworkData>
-, public Subject<std::shared_ptr<GameCommandBase>>
+, public Subject<GameCommandBase>
 {
     public:
+        GameSession() {}
         GameSession(std::shared_ptr<TcpSession> tcpSessionPtr)
-        : mTcpSessionPtr(tcpSessionPtr)
+        : mTcpSessionPtr(std::move(tcpSessionPtr))
         {
-            tcpSessionPtr->registerObserver(*this);
+            mTcpSessionPtr->registerObserver(*this);
+            mTcpSessionPtr->start();
         }
 
-        ~GameSession() override {}
+//        GameSession(const GameSession& other) = delete;
+//        GameSession(GameSession&& other) noexcept {
+//            mTcpSessionPtr = std::move(other.mTcpSessionPtr);
+//        }
+//
+//        void operator=(const GameSession &) = delete;
+//        GameSession& operator=(GameSession&& other)
+//        {
+//            mTcpSessionPtr = std::move(other.mTcpSessionPtr);
+//            return *this;
+//        }
 
 
         void update(net::common::RawNetworkData data) final
         {
-            std::shared_ptr<GameCommandBase> command = std::make_shared<GameCommandBase>();
-            json jsonData = json::parse(data);
-            std::cout << jsonData.dump(4) << std::endl;
+            GameCommandBase command;
+            //json jsonData = json::parse(data);
+            //std::cout << jsonData.dump(4) << std::endl;
             notifyObservers(command);
         }
 

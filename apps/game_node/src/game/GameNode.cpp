@@ -8,8 +8,14 @@ namespace mmo::game::node {
         {
             auto cmd = std::dynamic_pointer_cast<GamePlayerUpdateCommand>(command.command);
             auto character = cmd->getCharacter();
+
+            command.playerRef.updateGamecharacter(character);
+            auto updated_character = std::make_shared<GamePlayerUpdateCommand>(command.playerRef.getGameCharacter());
             /* Do some action on character */
-            command.playerRef.getGameSession().sendCmdToClient(cmd);
+            for (auto& player: mPlayers) {
+                player.getGameSession().sendCmdToClient(cmd);
+            }
+            //command.playerRef.getGameSession().sendCmdToClient(cmd);
         }
     }
 

@@ -28,12 +28,15 @@ class Player
         Player& operator=(Player&& other);
 
         mmo::common::game::Character getGameCharacter();
+        void updateGamecharacter(mmo::common::game::Character &character);
+
         GameSession &getGameSession();
         void update(std::shared_ptr<GameCommandBase> playerAction) final;
         
     private:
         GameSession                     mGameSession;
         mmo::common::game::Character    mGameCharacter;
+        static int                      mInstanceIdCnt;
         
 };
 #endif

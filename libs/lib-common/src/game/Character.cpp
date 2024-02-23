@@ -24,6 +24,11 @@ namespace mmo::common::game {
         mMotion = motion;
     }
 
+    void Character::setInstanceId(const std::string &id)
+    {
+        mInstanceId = id;
+    }
+
     std::ostream &operator<<(std::ostream& strm, const Character& obj)
     {
         strm << "Character{ Id: " << obj.id() << " InstanceId: " << obj.instanceId() << " MapId: " << obj.mapId() << " " << obj.motion();

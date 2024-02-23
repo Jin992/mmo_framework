@@ -18,6 +18,8 @@ namespace mmo::common::game {
             std::string mapId() const { return mMapId; }
             Motion      motion() const { return mMotion; }
 
+            void setInstanceId(const std::string &id);
+
             friend std::ostream &operator<<(std::ostream&, const Character&);
 
             json toJson();

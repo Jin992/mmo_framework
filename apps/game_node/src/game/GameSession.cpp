@@ -31,6 +31,7 @@ void GameSession::update(net::common::RawNetworkData data)
     if (updateType == "PLAYER_MOTION")
     {
         mmo::common::game::Character character(jsonData["Character"]);
+        std::cout << character << std::endl;
         notifyObservers(std::make_shared<GamePlayerUpdateCommand>(character));
     }
 }

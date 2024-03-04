@@ -1,0 +1,10 @@
+include "vec3.fbs";
+
+namespace mmo;
+
+table Motion {
+    map:string;
+    position:Vec3;
+    rotation:Vec3;
+    velocity:Vec3;
+}

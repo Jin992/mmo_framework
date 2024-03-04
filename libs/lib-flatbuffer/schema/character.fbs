@@ -1,0 +1,9 @@
+include "motion.fbs";
+
+namespace mmo;
+
+table Character {
+    id:string;
+    instanceId:string;
+    motion:Motion;
+}

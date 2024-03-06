@@ -1,0 +1,5 @@
+namespace mmo.game.server;
+
+table Respose {
+    id:int;
+}

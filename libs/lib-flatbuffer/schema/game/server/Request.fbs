@@ -1,0 +1,12 @@
+include "../character/Character.fbs";
+
+namespace mmo.game.server;
+
+enum RequestTypeE:byte { 
+    update_motion = 0
+}
+
+table Request {
+    type:RequestTypeE;
+    character:Character;
+}

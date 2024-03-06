@@ -1,9 +1,9 @@
-include "motion.fbs";
+include "Motion.fbs";
 
 namespace mmo;
 
 table Character {
     id:string;
-    instanceId:string;
+    instance_id:string;
     motion:Motion;
 }

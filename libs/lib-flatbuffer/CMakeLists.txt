@@ -6,8 +6,12 @@ set(FLATC_CPP_FLAGS --gen-object-api --gen-compare --gen-mutable)
 find_program(FLATBUFFERS_FLATC_EXECUTABLE flatc)
 find_package(Flatbuffers CONFIG REQUIRED)
 
-file(GLOB FLATBUFFER_SHCEMA_SCR CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/schema/*.fbs)
-message(${FLATBUFFER_SHCEMA_SCR})
+file(GLOB FLATBUFFER_SHCEMA_SCR CONFIGURE_DEPENDS 
+                                ${PROJECT_SOURCE_DIR}/schema/game/common/*.fbs 
+                                ${PROJECT_SOURCE_DIR}/schema/game/server/*.fbs 
+                                ${PROJECT_SOURCE_DIR}/schema/game/character/*.fbs
+                                )
+
 
 flatbuffers_generate_headers(TARGET fltb 
         SCHEMAS ${FLATBUFFER_SHCEMA_SCR} 

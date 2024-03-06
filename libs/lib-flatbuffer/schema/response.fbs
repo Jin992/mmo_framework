@@ -1,5 +1,0 @@
-namespace mmo.transport;
-
-table Response {
-    id:int;
-}
